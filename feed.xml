@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+
+<rss version="2.0"
+ xmlns:blogChannel="http://backend.userland.com/blogChannelModule"
+>
+
 <channel>
-<title>Placeholder - will be replaced by the first Action run</title>
-<link>https://www.crazyguyonabike.com/doc/?o=3d2&amp;doc_id=27166&amp;v=1V</link>
-<description>This file is overwritten automatically by .github/workflows/mirror-feed.yml</description>
+<title>Shaun&#x27;s Route 66 tour, part two 5</title>
+<link>http://www.crazyguyonabike.com/doc/ShaunsRoute66Part2</link>
+<description>Finishing Route 66</description>
+<language>en</language>
+<copyright>Copyright &#x26;copy; 2026 By . All Rights Reserved.</copyright>
+<pubDate>Thu, 27 Aug 2026 09:28:31 -0700</pubDate>
+<lastBuildDate>Thu, 27 Aug 2026 09:28:31 -0700</lastBuildDate>
+<managingEditor>neil@crazyguyonabike.com (Neil Gunton)</managingEditor>
+<webMaster>neil@crazyguyonabike.com (Neil Gunton)</webMaster>
+
+<item>
+<title>Bike and Gear List</title>
+<link>http://www.crazyguyonabike.com/doc/page/?page_id=709823</link>
+<description>I am an over-packer.  My loaded bike usually weighs between 110 and 120 pounds.  I really wanted to do this tour in a more lightweight fashion, so I started with a titanium Bearclaw Thunderhawk and put smaller panniers on it, using the excellent Tailfin system.
+
+I&#x27;ve never done a test ride on a loaded bike for other tours before this.  I figure I can fix anything I run into along the way, but I am really glad I did a test ride on this bike.  I learned that the titanium fork is absurdly unstable ev...</description>
+<guid isPermaLink="true">http://www.crazyguyonabike.com/doc/page/?page_id=709823</guid>
+<pubDate>Thu, 27 Aug 2026 09:28:31 -0700</pubDate>
+</item>
+<item>
+<title>Unfinished Business</title>
+<link>http://www.crazyguyonabike.com/doc/page/?page_id=709448</link>
+<description>On September 1, I will take the Amtrak Coast Starliner train to Los Angeles to finish Route 66.
+
+I cut my 2022 tour short in Tucumcari, NM when I got tired of the relentless headwinds, and I am hoping for better conditions this year!
+
+You can read about that tour here .
+
+I plan to reach Tucumcari, NM and we&#x27;ll see what happens from there.
+
+[pic]
+
+I decided to head eastward this time, for a couple reasons:
+
+...</description>
+<guid isPermaLink="true">http://www.crazyguyonabike.com/doc/page/?page_id=709448</guid>
+<pubDate>Tue, 18 Aug 2026 08:08:17 -0700</pubDate>
+</item>
 </channel>
 </rss>
