@@ -1,0 +1,41 @@
+name: Mirror CGOAB RSS feed
+
+on:
+  schedule:
+    # Every 30 minutes. GitHub may delay this slightly under load - that's fine
+    # for a touring blog that posts every few days.
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}   # lets you click "Run workflow" in the Actions tab to test on demand
+
+permissions:
+  contents: write   # needed so the workflow can commit feed.xml back to the repo
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the real feed with normal browser headers
+        run: |
+          curl -sSL \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" \
+            -H "Accept: application/rss+xml, application/xml, text/xml, */*" \
+            "https://www.crazyguyonabike.com/doc/rss/?doc_id=27166" \
+            -o feed.xml
+
+          # Sanity check: if we got blocked or hit an error page instead of RSS,
+          # fail loudly instead of silently publishing garbage.
+          if ! grep -q "<rss" feed.xml; then
+            echo "::error::Fetched content doesn't look like RSS - possibly blocked. First 40 lines:"
+            head -n 40 feed.xml
+            exit 1
+          fi
+
+      - name: Commit and push if the feed changed
+        run: |
+          git config user.name "feed-mirror-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add feed.xml
+          git diff --cached --quiet || git commit -m "Update mirrored feed $(date -u +%Y-%m-%dT%H:%M:%SZ)Z"
+          git push
