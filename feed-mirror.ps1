@@ -34,11 +34,23 @@ try {
 
     Move-Item -Force $tempFile "feed.xml"
 
-    git add feed.xml
+    # Use redirection operators (*>>), not `2>&1 | ...` - piping native stderr
+    # output through the pipeline turns it into a PowerShell ErrorRecord, which
+    # $ErrorActionPreference = "Stop" then treats as a terminating exception
+    # even when the command actually succeeded (git's own summary line goes to
+    # stderr on a normal push). Redirection avoids that; $LASTEXITCODE is the
+    # real signal.
+    git add feed.xml *>> $logFile
+    if ($LASTEXITCODE -ne 0) { throw "git add exited $LASTEXITCODE - see mirror.log" }
+
     $status = git status --porcelain
     if ($status) {
-        git commit -m "Update mirrored feed $([DateTime]::UtcNow.ToString('u'))" | Out-Null
-        git push 2>&1 | Out-File -FilePath $logFile -Append -Encoding utf8
+        git commit -m "Update mirrored feed $([DateTime]::UtcNow.ToString('u'))" *>> $logFile
+        if ($LASTEXITCODE -ne 0) { throw "git commit exited $LASTEXITCODE - see mirror.log" }
+
+        git push *>> $logFile
+        if ($LASTEXITCODE -ne 0) { throw "git push exited $LASTEXITCODE - see mirror.log" }
+
         Write-Log "Feed changed - committed and pushed."
     } else {
         Write-Log "No change."
