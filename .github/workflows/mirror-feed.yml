@@ -1,10 +1,13 @@
 name: Mirror CGOAB RSS feed
 
 on:
-  schedule:
-    # Every 30 minutes. GitHub may delay this slightly under load - that's fine
-    # for a touring blog that posts every few days.
-    - cron: "*/30 * * * *"
+  # Scheduled trigger disabled: GitHub's hosted runners get blocked/timed out
+  # by crazyguyonabike.com (likely a datacenter-IP block), so the actual
+  # fetch now runs from a Windows Task Scheduler job on a home connection
+  # instead. Kept workflow_dispatch so this can still be run manually to test.
+  #
+  # schedule:
+  #   - cron: "*/30 * * * *"
   workflow_dispatch: {}   # lets you click "Run workflow" in the Actions tab to test on demand
 
 permissions:
